@@ -19,7 +19,7 @@ form#formulario {
     background-color: white;
     padding: 20px 30px;
     border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -53,14 +53,10 @@ form#formulario select {
     cursor: pointer;
 }
 
-#boton:hover {
-    background-color: #0056b3;
-}
-
 footer {
     height: auto;
     display: flex;
-
+    justify-content: space-between;/* separa el texto y la imagen */
     width: 100%;
     text-align: center;
     padding: 10px 0;
@@ -69,7 +65,13 @@ footer {
     font-size: 14px;
     margin-top: auto;
 }
+
+#pFooter{
+    margin-left: 25px;
+}
+
 img {
+    margin-right: 25px;
     width: 50px;
     height: 50px;
 }
