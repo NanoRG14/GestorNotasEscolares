@@ -7,16 +7,20 @@
     <title>Gestor de notas</title>
     <link rel="stylesheet" href="/css/styles.css">
 </head>
-<h2>Gestor de notas 2º DAW</h2>
+<h2>Gestor de notas</h2>
 
 <body>
+
     <form id="formulario">
-    <label for="alumnoSelect">Alumno:</label>
+        
+        <Label>Curso <input type="radio" name="curso"> 1º <input type="radio"name="curso"> 2º</Label>
+    
+        <label for="alumnoSelect">Alumno:</label>
     <select id="alumnoSelect">
       <option value="">-- Selecciona un alumno --</option>
     </select>
-        <label for="Asignatura">Asignatura:</label>
-        <select id = "input" name="Asignatura">
+        <label for="asignatura">Asignatura:</label>
+        <select id = "asignaturaSelect" name="asignatura">
 
             <option value="Despliegue de aplicaciones web">Despliegue de aplicaciones web</option>
             <option value="Desarrollo web en entorno cliente">Desarrollo web en entorno cliente</option>
@@ -27,7 +31,7 @@
             <option value="IPE II">IPE II</option>
         </select><br>
 
-        <label for="Nota">Nota:</label>
+        <label for="nota">Nota:</label>
         <input type="text" id="input"><br>
         <input type="button" id="boton" value="Enviar">
 
