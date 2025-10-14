@@ -7,13 +7,17 @@
     <title>Gestor de notas</title>
     <link rel="stylesheet" href="/css/styles.css">
 </head>
-<h2>Gestor de notas</h2>
+
+<header>
+    <h2>Gestor de notas</h2>
+</header>
 
 <body>
 
     <form id="formulario">
 
-        <Label>Curso <input type="radio" name="curso"> 1º <input type="radio" name="curso"> 2º</Label>
+        <Label>Curso <input type="radio" name="curso" id="curso1"> 1º <input type="radio" name="curso" id="curso2">
+            2º</Label>
 
         <label for="alumnoSelect">Alumno:</label>
         <select id="alumnoSelect">
@@ -30,6 +34,31 @@
         <input type="button" id="boton" value="Enviar">
 
     </form>
+
+    <!-- Estado vacío -->
+    <div id="estadoVacio" class="card text-center">
+        <div class="icono-vacio"></div>
+        <h3>No hay calificaciones registradas</h3>
+        <p>Selecciona un curso, alumno y asignatura para comenzar a registrar calificaciones</p>
+    </div>
+    <!-- Resumen -->
+    <div id="resumen" class="badge hidden"></div>
+    <!-- Tabla de asignaturas -->
+    <table>
+
+        <thead>
+            <tr>
+                <th>Alumno</th>
+                <th>Curso</th>
+                <th>Asignatura</th>
+                <th>Calificación</th>
+                <th>Estado</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody id="tablaNotas"></tbody>
+    </table>
+
     <script src="./js/script.js"></script> <!--Enlace con script de JavaScript-->
 </body>
 <footer>
