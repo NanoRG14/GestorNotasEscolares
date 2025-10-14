@@ -1,69 +1,66 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gestor de notas</title>
-    <link rel="stylesheet" href="/css/styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gestor de notas</title>
+  <link rel="stylesheet" href="/css/styles.css">
 </head>
 
-<header>
-    <h2>Gestor de notas</h2>
-</header>
-
 <body>
+  <header>
+    <h2>Gestor de notas</h2>
+  </header>
 
-    <form id="formulario">
+  <form id="formulario">
+    <label>Curso:
+      <input type="radio" name="curso" id="curso1" value="1"> 1º
+      <input type="radio" name="curso" id="curso2" value="2"> 2º
+    </label>
 
-        <Label>Curso <input type="radio" name="curso" id="curso1"> 1º <input type="radio" name="curso" id="curso2">
-            2º</Label>
+    <label for="alumnoSelect">Alumno:</label>
+    <select id="alumnoSelect">
+      <option value="">-- Selecciona un alumno --</option>
+    </select>
 
-        <label for="alumnoSelect">Alumno:</label>
-        <select id="alumnoSelect">
-            <option value="">-- Selecciona un alumno --</option>
-        </select>
+    <label for="asignaturaSelect">Asignatura:</label>
+    <select id="asignaturaSelect" name="asignatura">
+      <option value="">-- Selecciona una asignatura --</option>
+    </select><br>
 
-        <label for="asignatura">Asignatura:</label>
-        <select id="asignaturaSelect" name="asignatura">
-            <option value="">-- Selecciona una asignatura --</option>
-        </select><br>
+    <label for="input">Nota:</label>
+    <input type="text" id="input"><br>
 
-        <label for="nota">Nota:</label>
-        <input type="text" id="input"><br>
-        <input type="button" id="boton" value="Enviar">
+    <input type="button" id="boton" value="Enviar">
+  </form>
 
-    </form>
+  <div id="estadoVacio" class="card text-center">
+    <div class="icono-vacio"></div>
+    <h3>No hay calificaciones registradas</h3>
+    <p>Selecciona un curso, alumno y asignatura para comenzar a registrar calificaciones</p>
+  </div>
 
-    <!-- Estado vacío -->
-    <div id="estadoVacio" class="card text-center">
-        <div class="icono-vacio"></div>
-        <h3>No hay calificaciones registradas</h3>
-        <p>Selecciona un curso, alumno y asignatura para comenzar a registrar calificaciones</p>
-    </div>
-    <!-- Resumen -->
-    <div id="resumen" class="badge hidden"></div>
-    <!-- Tabla de asignaturas -->
-    <table>
+  <div id="resumen" class="badge hidden"></div>
 
-        <thead>
-            <tr>
-                <th>Alumno</th>
-                <th>Curso</th>
-                <th>Asignatura</th>
-                <th>Calificación</th>
-                <th>Estado</th>
-                <th>Acciones</th>
-            </tr>
-        </thead>
-        <tbody id="tablaNotas"></tbody>
-    </table>
+  <table>
+    <thead>
+      <tr>
+        <th>Alumno</th>
+        <th>Curso</th>
+        <th>Asignatura</th>
+        <th>Calificación</th>
+        <th>Estado</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody id="tablaNotas"></tbody>
+  </table>
 
-    <script src="./js/script.js"></script> <!--Enlace con script de JavaScript-->
+  <script src="./js/script.js"></script>
 </body>
-<footer>
-    <p id="pFooter">&copy; Grupo 3 | 2º DAW | Todos los derechos reservados | 2025</p>
-    <img src="assets/img/iac.png" alt="IAC">
-</footer>
 
+<footer>
+  <p id="pFooter">&copy; Grupo 3 | 2º DAW | Todos los derechos reservados | 2025</p>
+  <img src="assets/img/iac.png" alt="IAC">
+</footer>
 </html>
