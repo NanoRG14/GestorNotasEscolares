@@ -1,77 +1,191 @@
+/* Fondo general con degradado suave */
 body {
-    margin: 0;
-    padding: 0;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color: #f4f4f4;
-    font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(to bottom right, #e3f2fd, #f3e5f5, #e8f5e9);
+}
+
+/* Encabezado con icono centrado */
+.icono-header {
+  font-size: 48px;
+  color: #5c6bc0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 h2 {
-    margin-top: 30px;
-    margin-bottom: 20px;
-    text-align: center;
+  margin-top: 30px;
+  margin-bottom: 20px;
+  text-align: center;
 }
 
+/* Formulario */
 form#formulario {
-    background-color: white;
-    padding: 20px 30px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 300px;
-    margin-bottom: 30px;
+  background-color: white;
+  padding: 20px 30px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 300px;
+  margin-bottom: 30px;
 }
 
 form#formulario label,
 form#formulario input[type="text"],
 form#formulario select {
-    width: 100%;
-    margin-bottom: 10px;
-    font-size: 16px;
+  width: 100%;
+  margin-bottom: 10px;
+  font-size: 16px;
 }
 
 form#formulario input[type="text"],
 form#formulario select {
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
 }
 
+/* Botón */
 #boton {
-    display: block;
-    margin: 20px auto 0;
-    padding: 10px 20px;
-    background-color: #007BFF;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
+  display: block;
+  margin: 20px auto 0;
+  padding: 10px 20px;
+  background-color: #007BFF;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
 }
 
+/* Tabla */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+}
+
+th, td {
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+  text-align: left;
+}
+
+/* Badge resumen */
+.badge {
+  padding: 10px;
+  border-radius: 5px;
+  color: white;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+/* Ocultar elementos */
+.hidden {
+  display: none;
+}
+
+/* Tarjeta de estado vacío */
+.card {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(4px);
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  margin-bottom: 20px;
+}
+
+/* Colores para las filas de la tabla según la nota */
+.row-purple {
+  background-color: #ede7f6;
+  border-left: 4px solid #7e57c2;
+  color: #4a148c;
+}
+
+.row-blue {
+  background-color: #e3f2fd;
+  border-left: 4px solid #42a5f5;
+  color: #0d47a1;
+}
+
+.row-green {
+  background-color: #e8f5e9;
+  border-left: 4px solid #66bb6a;
+  color: #1b5e20;
+}
+
+.row-red {
+  background-color: #ffebee;
+  border-left: 4px solid #ef5350;
+  color: #b71c1c;
+}
+
+/* Colores para el resumen de la media */
+.bg-purple {
+  background: linear-gradient(to right, #7e57c2, #ec407a);
+}
+
+.bg-blue {
+  background: linear-gradient(to right, #42a5f5, #26c6da);
+}
+
+.bg-green {
+  background: linear-gradient(to right, #66bb6a, #26a69a);
+}
+
+.bg-red {
+  background: linear-gradient(to right, #ef5350, #ff7043);
+}
+
+.btn-eliminar {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon-delete {
+  width: 24px; /* ajusta según el tamaño que prefieras */
+  height: 24px;
+  object-fit: contain;
+  filter: invert(28%) sepia(91%) saturate(748%) hue-rotate(340deg) brightness(90%) contrast(90%);
+  transition: transform 0.2s ease;
+}
+
+.btn-eliminar:hover .icon-delete {
+  transform: scale(1.2);
+}
+
+/* Footer */
 footer {
-    height: auto;
-    display: flex;
-    justify-content: space-between;/* separa el texto y la imagen */
-    width: 100%;
-    text-align: center;
-    padding: 10px 0;
-    background-color: #222;
-    color: #fff;
-    font-size: 14px;
-    margin-top: auto;
+  height: auto;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  text-align: center;
+  padding: 10px 0;
+  background-color: #222;
+  color: #fff;
+  font-size: 14px;
+  margin-top: auto;
 }
 
-#pFooter{
-    margin-left: 25px;
+#pFooter {
+  margin-left: 25px;
 }
 
 img {
-    margin-right: 25px;
-    width: 50px;
-    height: 50px;
+  margin-right: 25px;
+  width: 50px;
+  height: 50px;
 }

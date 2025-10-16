@@ -99,8 +99,8 @@ let calificaciones = [];
         <td>${asig.nombre}</td>
         <td>${asig.calificacion.toFixed(2)}</td>
         <td>${obtenerBadge(asig.calificacion).texto}</td>
-        <td><button onclick="eliminarAsignatura('${asig.id}')">Eliminar</button></td>
-      `;
+        <td><button onclick="eliminarAsignatura('${asig.id}')">
+        <img src="./assets/icon/delete.png" alt="Eliminar" class="icon-delete"/>></button></td>`;
       tablaNotas.appendChild(fila);
     });
 
