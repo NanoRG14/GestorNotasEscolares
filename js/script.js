@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function () {
-  //Referencias a elementos del DOM
+  // Referencias a elementos del DOM
   const alumnoSelect = document.getElementById('alumnoSelect');
   const asignaturaSelect = document.getElementById('asignaturaSelect');
   const notaInput = document.getElementById('input');
@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', function () {
   const estadoVacio = document.getElementById('estadoVacio');
   const boton = document.getElementById('boton');
 
+  // Lista de alumnos de 1º DAW
   const escolarizados1 = [
     "Lucía Beltrán Márquez", "María Fernanda Torres Llamas", "Iván Cordero Salcedo",
     "Elena Jimena Rivas Montoya", "Álvaro Molina Cifuentes", "Patricia Romero Barragán",
@@ -17,6 +18,7 @@ document.addEventListener('DOMContentLoaded', function () {
     "Nuria Gallardo Paredes", "Héctor Lozano Camacho"
   ];
 
+  // Lista de alumnos de 2º DAW
   const escolarizados2 = [
     "Alejandro Cordón García", "Noelia Díaz López", "Jorge Durán Muñoz",
     "José Javier García Flores", "Juan Jesús González García", "Alejandro González Macía",
@@ -27,12 +29,14 @@ document.addEventListener('DOMContentLoaded', function () {
     "José Miguel Sánchez Mariscal"
   ];
 
+  // Lista de asignaturas de 1º DAW
   const asignaturas1 = [
     "Lenguaje de marcas", "Sistemas informáticos", "Programación",
     "Bases de datos", "Itinerario Personal para la Empleabilidad I", "Entorno de Desarrollo", "Sostenibilidad",
     "Digitalización del Sistema Productivo"
   ];
 
+  // Lista de asignaturas de 2º DAW
   const asignaturas2 = [
     "Despliegue de aplicaciones web",
     "Desarrollo web en entorno cliente",
@@ -43,10 +47,12 @@ document.addEventListener('DOMContentLoaded', function () {
     "Itinerario Personal para la Empleabilidad II"
   ];
 
+  // Array para almacenar las calificaciones
   let calificaciones = [];
-  let cursoActual = "1";
-  let alumnoActual = "";
+  let cursoActual = "1"; // Curso seleccionado por defecto
+  let alumnoActual = ""; // Alumno seleccionado actualmente
 
+  // Rellena los selectores de alumno y asignatura según el curso
   function actualizarFormulario(curso) {
     alumnoSelect.innerHTML = '<option value="">-- Selecciona un alumno --</option>';
     asignaturaSelect.innerHTML = '<option value="">-- Selecciona una asignatura --</option>';
@@ -69,6 +75,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
+  // Devuelve clase CSS según la nota
   function obtenerColor(nota) {
     if (nota >= 9) return 'row-purple';
     if (nota >= 7) return 'row-blue';
@@ -76,6 +83,7 @@ document.addEventListener('DOMContentLoaded', function () {
     return 'row-red';
   }
 
+  // Devuelve texto y clase visual según la nota
   function obtenerBadge(nota) {
     if (nota >= 9) return { texto: 'Sobresaliente', clase: 'bg-purple' };
     if (nota >= 7) return { texto: 'Notable', clase: 'bg-blue' };
@@ -83,6 +91,7 @@ document.addEventListener('DOMContentLoaded', function () {
     return { texto: 'Suspenso', clase: 'bg-red' };
   }
 
+  // Calcula la media de notas de un alumno
   function calcularMediaAlumno(nombreAlumno) {
     const notasAlumno = calificaciones.filter(a => a.alumno === nombreAlumno);
     if (notasAlumno.length === 0) return 0;
@@ -90,6 +99,7 @@ document.addEventListener('DOMContentLoaded', function () {
     return suma / notasAlumno.length;
   }
 
+  // Renderiza la tabla con todas las calificaciones
   function renderTabla() {
     tablaNotas.innerHTML = '';
 
@@ -116,15 +126,18 @@ document.addEventListener('DOMContentLoaded', function () {
     actualizarEstadoVacio();
   }
 
+  // Muestra u oculta el mensaje de tabla vacía
   function actualizarEstadoVacio() {
     estadoVacio.classList.toggle('hidden', calificaciones.length > 0);
   }
 
+  // Elimina una asignatura por ID
   window.eliminarAsignatura = function (id) {
     calificaciones = calificaciones.filter(a => a.id !== id);
     renderTabla();
   };
 
+  // Escucha el cambio de curso y actualiza el formulario
   document.querySelectorAll('input[name="curso"]').forEach(radio => {
     radio.addEventListener('change', e => {
       cursoActual = e.target.value;
@@ -136,20 +149,21 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
 
-  //Restringir cambio de alumno si no ha completado todas las notas
+  // Restringe el cambio de alumno si no ha completado todas las notas
   alumnoSelect.addEventListener('change', e => {
     if (alumnoActual && alumnoActual !== e.target.value) {
       const materias = cursoActual === "1" ? asignaturas1 : asignaturas2;
       const notasAlumno = calificaciones.filter(a => a.alumno === alumnoActual);
       if (notasAlumno.length < materias.length) {
         alert(`Debes introducir todas las notas de ${alumnoActual} antes de cambiar de alumno.`);
-        alumnoSelect.value = alumnoActual; // volver al alumno anterior
+        alumnoSelect.value = alumnoActual;
         return;
       }
     }
     alumnoActual = e.target.value;
   });
 
+  // Añade una nueva calificación al array
   boton.addEventListener('click', () => {
     const alumno = alumnoSelect.value;
     const asignatura = asignaturaSelect.value;
@@ -184,7 +198,7 @@ document.addEventListener('DOMContentLoaded', function () {
     renderTabla();
   });
 
-  //Establecer 1º como curso y alumno por defecto
+  // Establece 1º DAW como curso inicial
   document.querySelector('input[name="curso"][value="1"]').checked = true;
   actualizarFormulario('1');
   actualizarEstadoVacio();
