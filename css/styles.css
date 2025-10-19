@@ -7,7 +7,7 @@ body {
   flex-direction: column;
   align-items: center;
   font-family: Arial, sans-serif;
-  background: linear-gradient(to bottom right, #e3f2fd, #f3e5f5, #e8f5e9);
+  background: linear-gradient(to bottom right, #D8D3E8, #a5cfd1, #D8D3E8);
 }
 
 /* Encabezado con icono centrado */
@@ -27,7 +27,7 @@ h2 {
 
 /* Formulario */
 form#formulario {
-  background-color: white;
+  background-color: #bcbcbc;
   padding: 20px 30px;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
@@ -82,7 +82,7 @@ th, td {
 .badge {
   padding: 10px;
   border-radius: 5px;
-  color: white;
+  color: rgb(0, 0, 0);
   font-weight: bold;
   margin-bottom: 10px;
 }
@@ -94,7 +94,7 @@ th, td {
 
 /* Tarjeta de estado vacío */
 .card {
-  background: rgba(255, 255, 255, 0.8);
+  background: #bcbcbc;
   backdrop-filter: blur(4px);
   padding: 20px;
   border-radius: 10px;
