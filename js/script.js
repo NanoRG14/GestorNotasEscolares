@@ -47,7 +47,7 @@ document.addEventListener('DOMContentLoaded', function () {
     "Itinerario Personal para la Empleabilidad II"
   ];
 
-  // Array para almacenar las calificaciones
+  // Variables de estado
   let calificaciones = [];
   let cursoActual = "1"; // Curso seleccionado por defecto
   let alumnoActual = ""; // Alumno seleccionado actualmente
@@ -103,20 +103,36 @@ document.addEventListener('DOMContentLoaded', function () {
   function renderTabla() {
     tablaNotas.innerHTML = '';
 
-    calificaciones.forEach(asig => {
-      const mediaAlumno = calcularMediaAlumno(asig.alumno);
-      const fila = document.createElement('tr');
-      fila.className = obtenerColor(asig.calificacion);
-      fila.innerHTML = `
-        <td>${asig.alumno}</td>
-        <td>${asig.curso}</td>
-        <td>${asig.nombre}</td>
-        <td>${asig.calificacion.toFixed(2)}</td>
-        <td>${obtenerBadge(asig.calificacion).texto}</td>
-        <td>${mediaAlumno.toFixed(2)}</td>
-        <td><button onclick="eliminarAsignatura('${asig.id}')">
-        <img src="./assets/icon/delete.png" alt="Eliminar" class="icon-delete"/></button></td>`;
-      tablaNotas.appendChild(fila);
+    // Agrupar por alumno
+    const alumnos = [...new Set(calificaciones.map(a => a.alumno))];
+
+    alumnos.forEach((nombre, index) => {
+      const notasAlumno = calificaciones.filter(a => a.alumno === nombre);
+      notasAlumno.forEach(asig => {
+        const mediaAlumno = calcularMediaAlumno(asig.alumno);
+        const fila = document.createElement('tr');
+        fila.className = obtenerColor(asig.calificacion);
+        fila.innerHTML = `
+          <td>${asig.alumno}</td>
+          <td>${asig.curso}</td>
+          <td>${asig.nombre}</td>
+          <td>${asig.calificacion.toFixed(2)}</td>
+          <td>${obtenerBadge(asig.calificacion).texto}</td>
+          <td>${mediaAlumno.toFixed(2)}</td>
+          <td>
+            <button class="btn-eliminar" onclick="eliminarAsignatura('${asig.id}')">
+              <img src="./assets/icon/delete.png" alt="Eliminar" class="icon-delete"/>
+            </button>
+          </td>`;
+        tablaNotas.prepend(fila);
+      });
+
+      // Agregar separación visual al final de cada alumno
+      if (index < alumnos.length - 1) {
+        const separador = document.createElement('tr');
+        separador.innerHTML = `<td colspan="7" style="height:10px; background:#f3f3f3; border:none;"></td>`;
+        tablaNotas.prepend(separador);
+      }
     });
 
     resumen.textContent = "Cada alumno tiene su propia media calculada.";
@@ -137,30 +153,46 @@ document.addEventListener('DOMContentLoaded', function () {
     renderTabla();
   };
 
-  // Escucha el cambio de curso y actualiza el formulario
+  // Escucha el cambio de curso y actualiza el formulario con confirmación
   document.querySelectorAll('input[name="curso"]').forEach(radio => {
     radio.addEventListener('change', e => {
-      cursoActual = e.target.value;
-      actualizarFormulario(cursoActual);
-      alumnoSelect.value = '';
-      asignaturaSelect.value = '';
-      notaInput.value = '';
-      alumnoActual = '';
+      const nuevoCurso = e.target.value;
+
+      if (nuevoCurso !== cursoActual) {
+        const confirmar = confirm(`¿Seguro que quieres cambiar a ${nuevoCurso === "1" ? "1º DAW" : "2º DAW"}?\nSe borrarán todas las notas actuales.`);
+
+        if (confirmar) {
+          calificaciones = [];
+          tablaNotas.innerHTML = '';
+          resumen.classList.add('hidden');
+          estadoVacio.classList.remove('hidden');
+          alumnoSelect.value = '';
+          asignaturaSelect.value = '';
+          notaInput.value = '';
+          alumnoActual = '';
+          cursoActual = nuevoCurso;
+          actualizarFormulario(cursoActual);
+        } else {
+          // Restaurar selección anterior si cancela
+          document.querySelector(`input[name="curso"][value="${cursoActual}"]`).checked = true;
+        }
+      }
     });
   });
 
-  // Restringe el cambio de alumno si no ha completado todas las notas
+  // Restringe el cambio de alumno solo si tiene notas pendientes
   alumnoSelect.addEventListener('change', e => {
-    if (alumnoActual && alumnoActual !== e.target.value) {
-      const materias = cursoActual === "1" ? asignaturas1 : asignaturas2;
-      const notasAlumno = calificaciones.filter(a => a.alumno === alumnoActual);
-      if (notasAlumno.length < materias.length) {
-        alert(`Debes introducir todas las notas de ${alumnoActual} antes de cambiar de alumno.`);
-        alumnoSelect.value = alumnoActual;
-        return;
-      }
+    const nuevoAlumno = e.target.value;
+    const materias = cursoActual === "1" ? asignaturas1 : asignaturas2;
+    const notasAlumno = calificaciones.filter(a => a.alumno === alumnoActual);
+
+    if (alumnoActual && alumnoActual !== nuevoAlumno && notasAlumno.length > 0 && notasAlumno.length < materias.length) {
+      alert(`Debes introducir todas las notas de ${alumnoActual} antes de cambiar de alumno.`);
+      alumnoSelect.value = alumnoActual;
+      return;
     }
-    alumnoActual = e.target.value;
+
+    alumnoActual = nuevoAlumno;
   });
 
   // Añade una nueva calificación al array
@@ -186,7 +218,8 @@ document.addEventListener('DOMContentLoaded', function () {
       return;
     }
 
-    calificaciones.push({
+    // Agregar nueva nota al inicio del array
+    calificaciones.unshift({
       id: Date.now().toString(),
       nombre: asignatura,
       calificacion: nota,

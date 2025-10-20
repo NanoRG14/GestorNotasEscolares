@@ -10,7 +10,7 @@ body {
   background: linear-gradient(to bottom right, #D8D3E8, #a5cfd1, #D8D3E8);
 }
 
-/* Encabezado con icono centrado */
+/* Encabezado */
 .icono-header {
   font-size: 48px;
   color: #5c6bc0;
@@ -27,7 +27,7 @@ h2 {
 
 /* Formulario */
 form#formulario {
-  background-color: #bcbcbc;
+  background-color: #7fadb0;
   padding: 20px 30px;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
@@ -94,7 +94,7 @@ th, td {
 
 /* Tarjeta de estado vacío */
 .card {
-  background: #bcbcbc;
+  background:#c1d8da;
   backdrop-filter: blur(4px);
   padding: 20px;
   border-radius: 10px;
@@ -102,7 +102,14 @@ th, td {
   margin-bottom: 20px;
 }
 
-/* Colores para las filas de la tabla según la nota */
+.separador-alumno td {
+  border-bottom: 3px solid #888;
+  background: linear-gradient(to right, #ccc, #eee, #ccc);
+  height: 5px;
+  padding: 0;
+}
+
+/* Colores según la nota */
 .row-purple {
   background-color: #ede7f6;
   border-left: 4px solid #7e57c2;
@@ -127,7 +134,7 @@ th, td {
   color: #b71c1c;
 }
 
-/* Colores para el resumen de la media */
+/* Colores para el resumen */
 .bg-purple {
   background: linear-gradient(to right, #7e57c2, #ec407a);
 }
@@ -144,19 +151,23 @@ th, td {
   background: linear-gradient(to right, #ef5350, #ff7043);
 }
 
+/* Botón eliminar */
 .btn-eliminar {
-  background: none;
+  background: transparent;
   border: none;
   padding: 0;
+  margin: 0;
+  line-height: 0;
   cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+}
+
+.btn-eliminar:focus {
+  outline: none;
 }
 
 .icon-delete {
-  width: 24px; /* ajusta según el tamaño que prefieras */
-  height: 24px;
+  width: 22px;
+  height: 22px;
   object-fit: contain;
   filter: invert(28%) sepia(91%) saturate(748%) hue-rotate(340deg) brightness(90%) contrast(90%);
   transition: transform 0.2s ease;
@@ -184,7 +195,7 @@ footer {
   margin-left: 25px;
 }
 
-img {
+footer img {
   margin-right: 25px;
   width: 50px;
   height: 50px;
